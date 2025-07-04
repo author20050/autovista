@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autovista</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section class="landing">
+      <h1>Enter Autovista</h1>
+      <p>Where Neon Dreams Burn Rubber</p>
+    </section>
+  
+    <header>
+      <h1>Welcome to Autovista</h1>
+      <p>Move Smart. Flex Loud.</p>
+    </header>
+  
+    <nav>
+      <a href="#garage">Garage</a>
+      <a href="#rules">City Rules</a>
+      <a href="#vip">CLØKK TØWER</a>
+      <a href="#emblem">Emblem Generator</a>
+    </nav>
+  
+    <section id="garage">
+      <h2>The Garage</h2>
+      <p>Choose your ride:</p>
+      <div class="garage-grid">
+        <div class="garage-card">
+          <img src="https://images.unsplash.com/photo-1619852058473-1d5c3c56985b" alt="BMW">
+          <p><strong>BMW (Jøk_Ër)</strong></p>
+        </div>
+        <div class="garage-card">
+          <img src="/Images/StockCake-Neon Speed Machine_1750954972.jpg" alt="Lamborghini">
+          <p><strong>Lamborghini</strong></p>
+        </div>
+        <div class="garage-card">
+          <img src="/Images/Wallpaper Car, Neon, Chevrolet Corvette, Race Cars - Wallpaperforu.jpeg" alt="Chevy">
+          <p><strong>Chevrolet</strong></p>
+        </div>
+        <div class="garage-card">
+          <img src="https://images.unsplash.com/photo-1610642075975-126deb296d90" alt="Audi">
+          <p><strong>Audi R8</strong></p>
+        </div>
+        <div class="garage-card">
+          <img src="/Images/StockCake-Neon Gothic Drift_1750955316.jpg" alt="Nissan GTR">
+          <p><strong>Nissan GTR</strong></p>
+        </div>
+      </div>
+    </section>
+  
+    <section id="rules">
+      <h2>City Rules & Roles</h2>
+      <ul>
+        <li>Flex loud, move smart</li>
+        <li>Respect the speed</li>
+        <li>No weak vibes</li>
+      </ul>
+      <p><strong>Second-in-Charge:</strong> V1SØR 👁️‍🗨️</p>
+    </section>
+  
+    <section id="vip">
+      <h2>CLØKK TØWER Access</h2>
+      <p>VIP only. Voice-auth entrance.</p>
+      <p>Now playing: <em>Throttle & Throne</em></p>
+    </section>
+  
+  <h1>Autovista Emblem & License Plate Generator</h1>
+
+  <div class="generator">
+    <h2>Emblem Generator</h2>
+    <input type="text" id="emblemText" placeholder="Enter Emblem Text" />
+    <select id="emblemStyle">
+      <option value="glitch">Glitch</option>
+      <option value="carbon">Carbon Fiber</option>
+      <option value="neon">Neon</option>
+      <option value="dark">Dark</option>
+    </select>
+    <br />
+    <canvas id="emblemCanvas" width="400" height="150"></canvas>
+    <br />
+    <button onclick="downloadCanvas('emblemCanvas', 'emblem.png')">Download Emblem</button>
+  </div>
+
+  <div class="generator">
+    <h2>License Plate Generator</h2>
+    <input type="text" id="plateText" placeholder="Enter Plate Text" maxlength="10" />
+    <br />
+    <canvas id="plateCanvas" width="400" height="150"></canvas>
+    <br />
+    <button onclick="downloadCanvas('plateCanvas', 'license_plate.png')">Download Plate</button>
+  </div>
+
+  <script>
+    function drawEmblem() {
+      const canvas = document.getElementById('emblemCanvas');
+      const ctx = canvas.getContext('2d');
+      const text = document.getElementById('emblemText').value.toUpperCase() || 'EMBLEM';
+      const style = document.getElementById('emblemStyle').value;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#000';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = 'bold 48px Orbitron';
+      ctx.textAlign = 'center';
+
+      ctx.fillStyle =
+        style === 'neon' ? '#00ffff' :
+        style === 'glitch' ? '#ff0077' :
+        style === 'carbon' ? '#aaaaaa' :
+        '#ffffff';
+
+      ctx.fillText(text, canvas.width / 2, 80);
+
+      ctx.font = '14px Orbitron';
+      ctx.fillStyle = '#888';
+      ctx.fillText('Creative Kings', canvas.width - 100, canvas.height - 10);
+    }
+
+    function drawPlate() {
+      const canvas = document.getElementById('plateCanvas');
+      const ctx = canvas.getContext('2d');
+      const text = document.getElementById('plateText').value.toUpperCase() || 'ØV-777';
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#111';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = '#00f0ff';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+      ctx.font = 'bold 50px Orbitron';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#00f0ff';
+      ctx.fillText(text, canvas.width / 2, 90);
+
+      ctx.font = '14px Orbitron';
+      ctx.fillStyle = '#00f0ff';
+      ctx.fillText('Creative Kings', canvas.width - 110, canvas.height - 10);
+    }
+
+    function downloadCanvas(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+
+    document.getElementById('emblemText').addEventListener('input', drawEmblem);
+    document.getElementById('emblemStyle').addEventListener('change', drawEmblem);
+    document.getElementById('plateText').addEventListener('input', drawPlate);
+
+    drawEmblem();
+    drawPlate();
+  </script> 
+
+    </section>
+  
+    <footer>
+      <p>&copy; 2025 Autovista. All rights reserved.</p>
+    </footer>
+  
+    <script>
+      function generateEmblem() {
+        const name = document.getElementById('emblemName').value;
+        const style = document.getElementById('style').value;
+        const preview = document.getElementById('emblemPreview');
+        if (!name) {
+          preview.innerHTML = 'Please enter a name for your emblem.';
+          return;
+        }
+        let bgStyle = '';
+        switch(style) {
+          case 'chrome':
+            bgStyle = 'background: linear-gradient(to right, #ccc, #666); color: #000;';
+            break;
+          case 'glitch':
+            bgStyle = 'background: linear-gradient(to right, #f0f, #0ff); color: #000;';
+            break;
+          case 'carbon':
+            bgStyle = 'background: repeating-linear-gradient(45deg, #333, #333 10px, #444 10px, #444 20px); color: #0ff;';
+            break;
+        }
+        preview.innerHTML = `<div class="emblem-image" style="${bgStyle}">${name}</div>`;
+      }
+    </script>
+  </body>
+      </html>
+      
