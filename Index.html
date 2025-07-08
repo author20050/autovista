@@ -71,6 +71,7 @@
   <h1>Autovista Emblem & License Plate Generator</h1>
 
  <div class="generator">
+    <div class="generator">
     <h2>Emblem Generator</h2>
     <input type="text" id="emblemText" placeholder="Enter Emblem Text" />
     <select id="emblemStyle">
@@ -96,6 +97,9 @@
   </div>
 
   <script>
+    const carFrontImg = new Image();
+    carFrontImg.src = 'data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDBmMGZmIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHBhdGggZD0iTTIxIDM5aDEyYTEgMSAwIDAgMSAxIDF2MmgxMnYtMmExIDEgMCAwIDEgMS0xaDEyYTEgMSAwIDAgMSAxIDF2NGExIDEgMCAwIDEtMSAxSDIyaC0xOGExIDEgMCAwIDEtMS0xdi00YTEgMSAwIDAgMSAxLTFaIi8+PHBhdGggZD0iTTMyIDRjMTYuNTYgMCAzMCAxMy40NCAzMCAzMFM0OC41NiA2MiAzMiA2MiAxMiA0OC41NiAxMiAzMiAxNS40NCA0IDMyIDRaTTMyIDExYTExIDEgMCAwIDAgLTExIDExIDExIDExIDAgMCAwIDExIDExIDExIDExIDAgMCAwIDExLTExIDExIDExIDAgMCAwIC0xMS0xMVoiLz48L3N2Zz4=';
+
     function drawEmblem() {
       const canvas = document.getElementById('emblemCanvas');
       const ctx = canvas.getContext('2d');
@@ -104,7 +108,6 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Background Styles
       if (style === 'glitch') {
         ctx.fillStyle = '#111';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -139,7 +142,6 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
 
-      // Emblem Text
       ctx.font = 'bold 50px Audiowide';
       ctx.textAlign = 'center';
       ctx.fillStyle = '#fff';
@@ -148,10 +150,9 @@
       ctx.fillText(text, canvas.width / 2, canvas.height / 2);
       ctx.shadowBlur = 0;
 
-      // Watermark
       ctx.font = '14px Orbitron';
       ctx.fillStyle = '#888';
-      ctx.fillText('Creative Kings', canvas.width - 110, canvas.height - 10);
+      ctx.fillText('Creative Kings', canvas.width - 120, canvas.height - 10);
     }
 
     function drawPlate() {
@@ -168,14 +169,17 @@
       ctx.lineWidth = 6;
       ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
 
+      ctx.drawImage(carFrontImg, 20, 30, 50, 50);
+
       ctx.font = 'bold 50px Orbitron';
-      ctx.textAlign = 'center';
+      ctx.textAlign = 'left';
       ctx.fillStyle = '#00f0ff';
-      ctx.fillText(text, canvas.width / 2, 90);
+      ctx.fillText(text, 90, 80);
 
       ctx.font = '14px Orbitron';
       ctx.fillStyle = '#00f0ff';
-      ctx.fillText('Creative Kings', canvas.width - 110, canvas.height - 10);
+      ctx.textAlign = 'right';
+      ctx.fillText('Creative Kings', canvas.width - 20, canvas.height - 10);
     }
 
     function downloadCanvas(canvasId, filename) {
@@ -186,19 +190,20 @@
       link.click();
     }
 
-    // Initial draws
     document.getElementById('emblemText').addEventListener('input', drawEmblem);
     document.getElementById('emblemStyle').addEventListener('change', drawEmblem);
     document.getElementById('plateText').addEventListener('input', drawPlate);
 
-    drawEmblem();
-    drawPlate();
+    carFrontImg.onload = () => {
+      drawEmblem();
+      drawPlate();
+    };
   </script>
 
     </section>
   
     <footer>
-      <p>&copy; 2025 Autovista. All rights reserved.</p>
+      <p>&copy; 2025 Autovista. All rights reserved. @Jok_Er & V1SØR</p>
     </footer>
   
     <script>

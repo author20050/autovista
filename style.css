@@ -124,6 +124,7 @@ body {
       text-shadow: 0 0 3px #00ffff;
       letter-spacing: 3px;
     } 
+    }
     .generator {
       background: #111;
       padding: 2rem;
@@ -131,6 +132,8 @@ body {
       border-radius: 10px;
       box-shadow: 0 0 20px #00ffff44;
       text-align: center;
+      width: 100%;
+      max-width: 500px;
     }
     input, select, button {
       margin: 0.5rem;
